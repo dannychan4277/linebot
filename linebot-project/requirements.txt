@@ -1,4 +1,4 @@
-echo "line-bot-sdk
+line-bot-sdk
 fastapi
 uvicorn
 openai
@@ -6,4 +6,4 @@ langchain
 chromadb
 python-multipart
 python-dotenv
-gunicorn" > requirements.txt
+gunicorn
