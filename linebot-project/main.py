@@ -22,9 +22,10 @@ async def root():
 async def callback(request: Request):
     signature = request.headers['X-Line-Signature']
     body = await request.body()
+    body_decode = body.decode('utf-8')
     
     try:
-        handler.handle(body.decode(), signature)
+        handler.handle(body_decode, signature)
     except InvalidSignatureError:
         raise HTTPException(status_code=400, detail="Invalid signature")
     
@@ -42,6 +43,7 @@ def handle_message(event):
         )
     except Exception as e:
         print(f"Error: {str(e)}")
-Last edited just now
-
-
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="抱歉，系統發生錯誤")
+        )
